@@ -2,7 +2,7 @@
 import FictionBookLib
 import TextAnalyzerLib
 
-way_to_document = r'main/example.fb2'
+way_to_document = r'main/example/example.fb2'
 sentences_in_block = 100
 
 

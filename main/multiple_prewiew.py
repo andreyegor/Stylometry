@@ -6,8 +6,8 @@ import TextAnalyzerLib
 
 author = []  # [name,surname]
 compare_author = False
-way_to_file = r'main/example/output/book.csv'
-way_to_folder = r'main/example/multiple_example'
+way_to_file = r'main/example/output.csv'
+way_to_folder = r'main/example/'
 columns_names = ['Author', 'Title',
                  'Lexical diversity', 'Mean word len', 'Mean sentence len', 'Commas per 1000 symbols']
 
