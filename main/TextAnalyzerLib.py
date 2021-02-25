@@ -80,6 +80,12 @@ class Analys:
         self.properties['commas_per_symbols'] = out
         return out
 
+    def GetTokens(self):
+        return self.tokens
+
+    def GetSentences(self):
+        return self.sentences
+
     def GetLexicalDevercity(self):
         return self.properties['lexical_diversity']
 
