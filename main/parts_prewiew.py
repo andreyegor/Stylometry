@@ -1,3 +1,4 @@
+
 import FictionBookLib
 import TextAnalyzerLib
 
@@ -19,3 +20,12 @@ if __name__ == '__main__':
     qwantity_sentences = len(sentences)
     sentences_blocks = sentences[0:qwantity_sentences //
                                  sentences_in_block * sentences_in_block]
+    properties = []
+    for i in range((len(sentences_blocks)//sentences_in_block)-1):
+
+        analysed_block = TextAnalyzerLib.Analys(
+            MergeList(
+                sentences_blocks[sentences_in_block*i:sentences_in_block*(i+1)]))
+        properties.append(analysed_block.GetAll())
+        print('█', end='')
+    print(properties)
