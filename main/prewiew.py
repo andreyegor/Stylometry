@@ -1,7 +1,7 @@
 import FictionBookLib
 import TextAnalyzerLib
 
-way_to_document = r"main/example.fb2"  # way to fb2 file
+way_to_document = r"main/example/example.fb2"  # way to fb2 file
 
 if __name__ == '__main__':
     book = FictionBookLib.FB2(way_to_document)
