@@ -16,8 +16,8 @@ if __name__ == '__main__':
     out_file = open(way_to_file, 'w', encoding='utf-8')
     writer = csv.writer(out_file)
     writer.writerow(columns_names)
-    for i in list_of_files:
-        book = FictionBookLib.FB2(way_to_folder+'\\'+i)
+    for file in list_of_files:
+        book = FictionBookLib.FB2(way_to_folder+'\\'+file)
         if book.GetAuthor() == author or compare_author == False:
             Analysed = TextAnalyzerLib.Analys(book.GetMainText())
             out = book.GetBookTitle()
