@@ -31,16 +31,13 @@ def analysis_parts(way_to_document, sentences_in_block=100):
     qwantity_sentences = len(sentences)
     sentences_blocks = sentences[0:qwantity_sentences //
                                  sentences_in_block * sentences_in_block]
-    properties = [[], [], [], []]
+    properties = []
     print("Please wait...")
     for i in range((len(sentences_blocks)//sentences_in_block)-1):
         analysed_block = TextAnalyzerLib.Analys(
             MergeList(
                 sentences_blocks[sentences_in_block*i:sentences_in_block*(i+1)]))
-        properties[0].append(analysed_block.GetLexicalDevercity())
-        properties[1].append(analysed_block.GetMeanWordLen())
-        properties[2].append(analysed_block.GetMeanSentenceLen())
-        properties[3].append(analysed_block.GetCommasPerSymbols())
+        properties.append(analysed_block)
         print(i, end=', ')
     return(properties, book)
 
@@ -55,6 +52,21 @@ def analysis_folder(way_to_folder, check_author=False, author=['name', 'surname'
             if book.GetAuthor() == author:
                 analysed.append(TextAnalyzerLib.Analys(book.GetMainText()))
                 books.append(book)
+        else:
+            analysed.append(TextAnalyzerLib.Analys(book.GetMainText()))
+            books.append(book)
+    return analysed, books
+
+
+def analysis_parts_folder(way_to_folder, sentences_in_block=100):
+    books = []
+    analysed = []
+    list_of_files = listdir(way_to_folder)
+    for file in list_of_files:
+        a, b = analysis_parts(way_to_folder+'/'+file, sentences_in_block)
+        analysed.append(a)
+        books.append(b)
+
     return analysed, books
 
 # return block
@@ -84,3 +96,6 @@ def return_analysis_one(way_to_document, in_file=False, new=True):
         print(str(Analysed.GetCommasPerSymbols()) +
               " - commas per 1000 symbols")
     print("Success!")
+
+
+print(analysis_parts_folder('main/example/'))
