@@ -6,7 +6,7 @@ import csv
 import FictionBookLib
 import TextAnalyzerLib
 
-COLUMNS = ['Author', 'Title', 'Lexical diversity', 'Mean word len',
+COLUMNS = ['Book', 'Lexical diversity', 'Mean word len',
            'Mean sentence len', 'Commas per 1000 symbols']
 # supporting functions
 
@@ -119,8 +119,8 @@ def ReturnAnalysis(way_to_document, in_file=False, new=True):
             writer.writerow(row)
         f.close()
     else:
-        print(str(Analysed.GetLexicalDevercity()*100) + "% - " + COLUMNS[2])
-        print(str(Analysed.GetMeanWordLen()) + " - "+COLUMNS[3])
+        print(str(Analysed.GetLexicalDevercity()*100) + "% - " + COLUMNS[1])
+        print(str(Analysed.GetMeanWordLen()) + " - "+COLUMNS[2])
         print(str(Analysed.GetMeanSentenceLen()) +
               " - "+COLUMNS[3])
         print(str(Analysed.GetCommasPerSymbols()) +
@@ -135,18 +135,35 @@ def ReturnAnalysisParts(way_to_file, sentences_in_block=150, ):
     title = book.GetBookTitle() + ', (' + MergeList(book.GetAuthor())+')'
     for i in range(4):
         x_list.append(list(range(len(y_list[i]))))
-    label_list = COLUMNS[2:]
+    label_list = COLUMNS[1:]
     Graph(x_list, y_list, label_list, title)
     print(y_list)
+
+
+"""
+def ReturnAnalysisFolder(way_to_folder, check_author=False, author=['name', 'surname'], save=False, way_to_save=None):
+    global COLUMNS
+    propertys, books = AnalysisFolder(way_to_folder, check_author, author)
+    if save:
+        out_file = open(way_to_save, 'w', encoding='utf-8')
+        writer = csv.writer(out_file)
+        writer.writerow(COLUMNS)
+        for i in range(len(books)):
+            writer.writerow([books[i]]+
+        out_file.close
+    else:
+        print(books.GetTytle)
+"""
 
 
 def ReturnAnalysisPartsFolder(way_to_folder, sentences_in_block=150, check_author=False, author=['name', 'surname'], prop=0):
     global COLUMNS
     y_list = []
     x_list = []
-    propertys, books = AnalysisPartsFolder(way_to_folder)
+    propertys, books = AnalysisPartsFolder(
+        way_to_folder, sentences_in_block=sentences_in_block, check_author=check_author, author=author)
     for p in propertys:
         y_list.append(p[prop])
     for i in range(len(y_list)):
         x_list.append(list(range(len(y_list[i]))))
-    Graph(x_list, y_list, books, title=COLUMNS[prop+2])
+    Graph(x_list, y_list, books, title=COLUMNS[prop+1])
