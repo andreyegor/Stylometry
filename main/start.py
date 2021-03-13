@@ -74,7 +74,6 @@ def ReturnAnalysisPartsFolderView():
     p = input('Please write analyzed property: ')
     if p in props.keys():
         kwargs['prop'] = props[p]
-
     functions.ReturnAnalysisPartsFolder(way_to_file, **kwargs)
 
 
@@ -85,16 +84,17 @@ COMMANDS = {
     'analysis pf': ReturnAnalysisPartsFolderView,
     'help': helpme
 }
-
-while True:
-    command = input()
-    if command in COMMANDS.keys():
-        try:
-            COMMANDS[command]()
-            print('Success!')
-        except:
-            print('Failed!')
-    elif command.lower() == 'exit':
-        break
-    else:
-        print('No such command')
+if __name__ == '__main__':
+    while True:
+        command = input()
+        if command in COMMANDS.keys():
+            try:
+                print('Please wait...')
+                COMMANDS[command]()
+                print('Success!')
+            except:
+                print('Failed!')
+        elif command.lower() == 'exit':
+            break
+        else:
+            print('No such command')
