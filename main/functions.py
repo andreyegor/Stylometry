@@ -65,7 +65,7 @@ def AnalysisFolder(way_to_folder, check_author=False, author=['name', 'surname']
     propertys = []
     list_of_files = listdir(way_to_folder)
     for file in list_of_files:
-        analysed, book = AnalysisParts(way_to_folder+'\\'+file)
+        analysed, book = Analysis(way_to_folder+'\\'+file)
         if check_author:
             if book.GetAuthor() == author:
                 books.append(book)
@@ -143,8 +143,9 @@ def ReturnAnalysisFolder(way_to_folder, check_author=False, author=['name', 'sur
         writer = csv.writer(out_file)
         writer.writerow(COLUMNS)
         for i in range(len(books)):
-            writer.writerow([books[i]+propertys[i]])
-            out_file.close()
+            writer.writerow(
+                [books[i].GetBookTitle()+str(propertys[i].GetAll())[1:-1]])
+        out_file.close()
     else:
         for i in range(len(books)):
             print([books[i]+propertys[i]])
@@ -161,6 +162,3 @@ def ReturnAnalysisPartsFolder(way_to_folder, sentences_in_block=150, check_autho
     for i in range(len(y_list)):
         x_list.append(list(range(len(y_list[i]))))
     Graph(x_list, y_list, books, title=COLUMNS[prop+1])
-
-
-ReturnAnalysisParts('main/example/ex2.fb2')
