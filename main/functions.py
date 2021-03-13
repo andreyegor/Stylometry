@@ -19,7 +19,7 @@ def Graph(x_list, y_list, label_list, title="undefended"):
             if len(y_list[i]) == len(y_list[i]):
                 ax.plot(x_list[i], y_list[i], label=label_list[i])
             else:
-                print(label_list[i]+" - output error")
+                raise ValueError(label_list[i])
     ax.set_title(title)
     ax.legend()
     plt.show()
@@ -37,7 +37,6 @@ def MergeList(tlist):
 
 def Analysis(way_to_document):
     book = FictionBookLib.FB2(way_to_document)
-    print('Please wait...')
     Analysed = TextAnalyzerLib.Analys(book.GetMainText())
     return Analysed, book
 
@@ -50,7 +49,6 @@ def AnalysisParts(way_to_document, sentences_in_block=100):
     sentences_blocks = sentences[0:qwantity_sentences //
                                  sentences_in_block * sentences_in_block]
     properties = [[], [], [], []]
-    print("Please wait...")
     for i in range((len(sentences_blocks)//sentences_in_block)-1):
         analysed_block = TextAnalyzerLib.Analys(
             MergeList(
@@ -59,7 +57,6 @@ def AnalysisParts(way_to_document, sentences_in_block=100):
         properties[1].append(analysed_block.GetMeanWordLen())
         properties[2].append(analysed_block.GetMeanSentenceLen())
         properties[3].append(analysed_block.GetCommasPerSymbols())
-        print(i, end=', ')
     return(properties, book)
 
 
@@ -102,19 +99,19 @@ def AnalysisPartsFolder(way_to_folder, sentences_in_block=100, check_author=Fals
 # return functions
 
 
-def ReturnAnalysis(way_to_document, in_file=False, new=True):
+def ReturnAnalysis(way_to_document, in_file=False, file_name='default.csv', new=True):
     global COLUMNS
     Analysed, book = Analysis(way_to_document)
     if in_file:
         row = [book.GetAuthor()[0]+' ' + book.GetAuthor()
                [1], book.GetBookTitle()]+list(Analysed.GetAll().values())
         if new:
-            f = open(in_file, 'w', encoding='utf-8')
+            f = open(file_name, 'w', encoding='utf-8')
             writer = csv.writer(f)
             writer.writerow(COLUMNS)
             writer.writerow(row)
         else:
-            f = open(in_file, 'a', encoding='utf-8')
+            f = open(file_name, 'a', encoding='utf-8')
             writer = csv.writer(f)
             writer.writerow(row)
         f.close()
@@ -125,10 +122,9 @@ def ReturnAnalysis(way_to_document, in_file=False, new=True):
               " - "+COLUMNS[3])
         print(str(Analysed.GetCommasPerSymbols()) +
               " - "+COLUMNS[4])
-    print("Success!")
 
 
-def ReturnAnalysisParts(way_to_file, sentences_in_block=150, ):
+def ReturnAnalysisParts(way_to_file, sentences_in_block=150):
     global COLUMNS
     y_list, book = AnalysisParts(way_to_file, sentences_in_block)
     x_list = []
@@ -137,23 +133,21 @@ def ReturnAnalysisParts(way_to_file, sentences_in_block=150, ):
         x_list.append(list(range(len(y_list[i]))))
     label_list = COLUMNS[1:]
     Graph(x_list, y_list, label_list, title)
-    print(y_list)
 
 
-"""
-def ReturnAnalysisFolder(way_to_folder, check_author=False, author=['name', 'surname'], save=False, way_to_save=None):
+def ReturnAnalysisFolder(way_to_folder, check_author=False, author=['name', 'surname'], in_file=False, file_name='default.csv', new=True):
     global COLUMNS
     propertys, books = AnalysisFolder(way_to_folder, check_author, author)
-    if save:
-        out_file = open(way_to_save, 'w', encoding='utf-8')
+    if in_file:
+        out_file = open(file_name, 'w', encoding='utf-8')
         writer = csv.writer(out_file)
         writer.writerow(COLUMNS)
         for i in range(len(books)):
-            writer.writerow([books[i]]+
-        out_file.close
+            writer.writerow([books[i]+propertys[i]])
+            out_file.close()
     else:
-        print(books.GetTytle)
-"""
+        for i in range(len(books)):
+            print([books[i]+propertys[i]])
 
 
 def ReturnAnalysisPartsFolder(way_to_folder, sentences_in_block=150, check_author=False, author=['name', 'surname'], prop=0):
@@ -167,3 +161,6 @@ def ReturnAnalysisPartsFolder(way_to_folder, sentences_in_block=150, check_autho
     for i in range(len(y_list)):
         x_list.append(list(range(len(y_list[i]))))
     Graph(x_list, y_list, books, title=COLUMNS[prop+1])
+
+
+ReturnAnalysisParts('main/example/ex2.fb2')
