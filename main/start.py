@@ -70,10 +70,11 @@ def ReturnAnalysisPartsFolderView():
              '-mw': 1,
              '-ms': 2,
              '-cs': 3}
-    for t in propertys:
-        if t in props.keys():
-            kwargs['prop'] = props[t]
     AnalysisPropertys(propertys, kwargs)
+    p = input('Please write analyzed property: ')
+    if p in props.keys():
+        kwargs['prop'] = props[p]
+
     functions.ReturnAnalysisPartsFolder(way_to_file, **kwargs)
 
 

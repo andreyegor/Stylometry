@@ -148,7 +148,7 @@ def ReturnAnalysisFolder(way_to_folder, check_author=False, author=['name', 'sur
         out_file.close()
     else:
         for i in range(len(books)):
-            print([books[i]+propertys[i]])
+            print(books[i].GetBookTitle()+str(propertys[i].GetAll())[1:-1])
 
 
 def ReturnAnalysisPartsFolder(way_to_folder, sentences_in_block=150, check_author=False, author=['name', 'surname'], prop=0):
