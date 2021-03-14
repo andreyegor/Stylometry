@@ -37,6 +37,7 @@ def ReturnAnalysisView():
               'file_name': 'default.csv',
               'new': True}
     AnalysisPropertys(propertys, kwargs)
+    print('Please wait...')
     functions.ReturnAnalysis(way_to_file, **kwargs)
 
 
@@ -44,6 +45,7 @@ def ReturnAnalysisPartsView():
     way_to_file, propertys = inputs()
     kwargs = {'sentences_in_block': 150}
     AnalysisPropertys(propertys, kwargs)
+    print('Please wait...')
     functions.ReturnAnalysisParts(way_to_file, **kwargs)
 
 
@@ -55,6 +57,7 @@ def ReturnAnalysisFolderView():
               'file_name': 'default.csv',
               'new': True}
     AnalysisPropertys(propertys, kwargs)
+    print('Please wait...')
     functions.ReturnAnalysisFolder(way_to_file, **kwargs)
 
 
@@ -74,6 +77,7 @@ def ReturnAnalysisPartsFolderView():
     p = input('Please write analyzed property: ')
     if p in props.keys():
         kwargs['prop'] = props[p]
+    print('Please wait...')
     functions.ReturnAnalysisPartsFolder(way_to_file, **kwargs)
 
 
@@ -84,12 +88,12 @@ COMMANDS = {
     'analysis pf': ReturnAnalysisPartsFolderView,
     'help': helpme
 }
+
 if __name__ == '__main__':
     while True:
         command = input()
         if command in COMMANDS.keys():
             try:
-                print('Please wait...')
                 COMMANDS[command]()
                 print('Success!')
             except:

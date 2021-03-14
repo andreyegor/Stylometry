@@ -3,7 +3,6 @@ import string
 
 
 nltk.download('punkt')
-text = "мой,   текст"
 
 
 class Analys:
