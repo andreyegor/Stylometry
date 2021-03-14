@@ -12,7 +12,6 @@ def helpme():
 
 
 def AnalysisPropertys(propertys, kwargs):
-    kwargs = kwargs
     if '-f' in propertys and 'in_file' in kwargs.keys():
         kwargs['in_file'] = True
         if '-n' in propertys and 'new' in kwargs.keys():
