@@ -19,16 +19,15 @@ class FB2:
         self.parsed_document = xml.dom.minidom.parse(self.way_to_document)
         self.parsed_document.normalize()
         if full_parse:
-            self.ParseDocument()
+            self.parse_document()
 
-    def ParseDocument(self):
+    def parse_document(self):
         """This is a function to full document parse"""
-        self.ParseAuthor()
-        self.ParseBookTitle()
-        self.ParseMainText()
-        self.ParseMainText()
+        self.parse_author()
+        self.parse_book_title()
+        self.parse_main_text()
 
-    def ParseAuthor(self):
+    def parse_author(self):
         out = [None, None]
         out[0] = self.parsed_document.getElementsByTagName(
             "first-name")[0].childNodes[0].nodeValue
@@ -37,13 +36,13 @@ class FB2:
         self.author = out
         return out
 
-    def ParseBookTitle(self):
+    def parse_book_title(self):
         out = self.parsed_document.getElementsByTagName(
             "book-title")[0].childNodes[0].nodeValue
         self.book_title = out
         return out
 
-    def ParseMainText(self):
+    def parse_main_text(self):
         p_nodes = self.parsed_document.getElementsByTagName("p")
         out = ""
         for i in range(len(p_nodes)):
@@ -53,14 +52,14 @@ class FB2:
         self.main_text = out
         return out
 
-    def GetMainText(self):
+    def get_main_text(self):
         """ None, if you don't parse main text"""
         return self.main_text
 
-    def GetAuthor(self):
+    def get_author(self):
         """ [None, None], if you don't parse author"""
         return self.author
 
-    def GetBookTitle(self):
+    def get_book_title(self):
         """ None, if you don't parse book title"""
         return self.book_title

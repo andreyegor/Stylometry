@@ -2,10 +2,11 @@ import nltk
 import string
 
 
-nltk.download('punkt')
+def nltk_download():
+    nltk.download('punkt')
 
 
-class Analys:
+class analys:
     properties = {}
 
     def __init__(self, text, quantity_symbols=1000, full_analyze=True):
@@ -20,18 +21,18 @@ class Analys:
         self.tokens = nltk.word_tokenize(text)
         self.sentences = nltk.sent_tokenize(text)
         self.quantity_symbols = quantity_symbols
-        self.RemovePunctuation()
+        self.remove_punctuation()
         if full_analyze:
-            self.FullParse()
+            self.full_parse()
 
-    def FullParse(self):
+    def full_parse(self):
         """This is a function to full text analysis"""
-        self.ParseLexicalDivercity()
-        self.ParseMeanWordLen()
-        self.ParseMeanSentenceLen()
-        self.ParseCommasPerСharacters()
+        self.parse_lexical_divercity()
+        self.parse_mean_word_len()
+        self.parse_mean_sentence_len()
+        self.parse_commas_per_characters()
 
-    def RemovePunctuation(self):
+    def remove_punctuation(self):
         """This is a function to remove punctuation from tokens"""
         remove_punctuation = str.maketrans('', '', string.punctuation)
         out = []
@@ -41,13 +42,13 @@ class Analys:
                 out.append(translated)
         self.tokens_without_punctuation = out
 
-    def ParseLexicalDivercity(self):
+    def parse_lexical_divercity(self):
         out = (len(set(
             self.tokens_without_punctuation)) / len(self.tokens_without_punctuation))
         self.properties['lexical_diversity'] = out
         return out
 
-    def ParseMeanWordLen(self):
+    def parse_mean_word_len(self):
         word_char = []
         words = set(self.tokens_without_punctuation)
         for word in words:
@@ -56,7 +57,7 @@ class Analys:
         self.properties['mean_word_len'] = out
         return out
 
-    def ParseMeanSentenceLen(self):
+    def parse_mean_sentence_len(self):
         sentence_len = []
         for sentence in self.sentences:
             sentence_len.append(len(sentence))
@@ -65,7 +66,7 @@ class Analys:
         self.properties['mean_sentence_len'] = out
         return out
 
-    def ElementsPerСharacters(self, element, qwantity):
+    def elements_per_characters(self, element, qwantity):
         """This function finds the number of elements per characters in the text
 
         Args:
@@ -76,28 +77,28 @@ class Analys:
         elements = (fdist[element] * qwantity) / fdist.N()
         return elements
 
-    def ParseCommasPerСharacters(self):
-        out = self.ElementsPerСharacters(',', self.quantity_symbols)
+    def parse_commas_per_characters(self):
+        out = self.elements_per_characters(',', self.quantity_symbols)
         self.properties['commas_per_symbols'] = out
         return out
 
-    def GetTokens(self):
+    def get_tokens(self):
         return self.tokens
 
-    def GetSentences(self):
+    def get_sentences(self):
         return self.sentences
 
-    def GetLexicalDevercity(self):
+    def get_lexical_devercity(self):
         return self.properties['lexical_diversity']
 
-    def GetMeanWordLen(self):
+    def get_mean_word_len(self):
         return self.properties['mean_word_len']
 
-    def GetMeanSentenceLen(self):
+    def get_mean_sentence_len(self):
         return self.properties['mean_sentence_len']
 
-    def GetCommasPerSymbols(self):
+    def get_commas_per_symbols(self):
         return self.properties['commas_per_symbols']
 
-    def GetAll(self):
+    def get_all(self):
         return self.properties
