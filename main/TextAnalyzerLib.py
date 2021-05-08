@@ -2,7 +2,7 @@ import nltk
 import string
 
 
-def nltk_download():
+def punkt_download():
     nltk.download('punkt')
 
 

@@ -87,7 +87,8 @@ COMMANDS = {
     'analysis p': return_analysis_parts_view,
     'analysis f': return_analysis_folder_view,
     'analysis pf': return_analysis_parts_folder_view,
-    'help': help_me
+    'help': help_me,
+    'download': functions.textanalyzerlib.punkt_download
 }
 
 if __name__ == '__main__':
