@@ -10,6 +10,22 @@ def inputs(way_to='file'):
 
 
 def help_me():
+    help_text = """If you are using this for the first time use the $download
+Functions:
+    $analysis m - analysis one file
+    $analysis p - analysis many parts from one file
+    $analysis f - analysis files in folder
+    $analysis pf - analysis many parts from files in folder
+Propertys:
+    '-f' - save in file (analysis m or analysis f)
+    '-s - chainge sentences in part (analysis p or analysis pf)
+Analyzed propertys(analysis p or analysis pf):
+    '-ld' - lexical divercity
+    '-mw' - mean word len
+    '-ms' - mean sentence len
+    '-cs' - commas per symbols
+"""
+    print(help_text)
     pass
 
 
@@ -75,7 +91,7 @@ def return_analysis_parts_folder_view():
              '-ms': 2,
              '-cs': 3}
     analysis_propertys(propertys, kwargs)
-    p = input('Please path analyzed property: ')
+    p = input('Please analyzed property: ')
     if p in props.keys():
         kwargs['prop'] = props[p]
     print('Please wait...')
@@ -92,14 +108,14 @@ COMMANDS = {
 }
 
 if __name__ == '__main__':
+    print("You can use $help")
     while True:
         command = input()
         if command in COMMANDS.keys():
             try:
                 COMMANDS[command]()
-                print('Success!')
             except:
-                print('Failed!')
+                print('FAILED')
         elif command.lower() == 'exit':
             break
         else:
