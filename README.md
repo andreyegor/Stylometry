@@ -33,9 +33,16 @@ $analysis pf - проанализировать все файлы в папке 
 ### Класс analys
     n = textanalyzerlib.analys('ваш текст', quantity_symbols=1000, full_analyze = True)
 - quantity_symbols - количество символов в блоке
-- full_analyze - анализирует текст по всем параметрам, если True
+- full_analyze - анализирует текст по всем параметрам, если True\
+#### Методы
 - full_parse() - анализирует текст по всем параметрам (не нужен, если full_analyze == True)
-#### Получают соответствующие параметры
+- parse_lexical_divercity() - анализирует текст по лексическому разнообразию
+- parse_mean_word_len() - анализирует по средней длинне слова
+- parse_mean_sentence_len() - анализирует по средней длинне предложения
+- elements_per_characters(element, qwantity) - анализирует частоту использования элемента (element) на количество (qwantity) символов
+- parse_commas_per_characters() - анализирует частоту использования запятых на количество (quantity_symbols) символов
+
+##### Просто получают соответствующие параметры
 - get_tokens()
 - get_sentences()
 - get_lexical_devercity()
@@ -43,6 +50,21 @@ $analysis pf - проанализировать все файлы в папке 
 - get_mean_sentence_len()
 - get_commas_per_symbols()
 - get_all()
+
+## fictionbooklib
+Это небольшая библиотека для работы с форматом FB2
+### Класс FB2
+    n = fictionbooklib.FB2(way_to_document, full_parse=True)
+- way_to_document - путь к вашему файлу .fb2
+- full_parse - если True, то полностью парсит докуиент
+#### Методы
+- parse_author() - получает информацию о авторе (в разработке)
+- parse_book_title() - получает  название
+- parse_main_text() - получает основной текст
+##### Просто получают соответствующие параметры
+- get_main_text()
+- get_author()
+- get_book_title()
 
 
 
