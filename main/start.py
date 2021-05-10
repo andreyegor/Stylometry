@@ -19,7 +19,7 @@ Functions:
 Propertys:
     '-f' - save in file (analysis m or analysis f)
     '-s - chainge sentences in part (analysis p or analysis pf)
-Analyzed propertys(analysis p or analysis pf):
+Analyzed propertys(analysis pf):
     '-ld' - lexical divercity
     '-mw' - mean word len
     '-ms' - mean sentence len
