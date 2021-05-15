@@ -3,27 +3,31 @@ import re
 import functions
 
 
-def inputs(way_to='file'):
-    way_to_file = str(input('Please write path to ' + way_to + ' : ')).lower()
+def inputs(path_to='файлу'):
+    way_to_file = str(
+        input('Пожалуйста введите путь к ' + path_to + ' : ')).lower()
     propertys = str(input('Please write propertys: ')).lower().split()
     return(way_to_file, propertys)
 
 
 def help_me():
-    help_text = """If you are using this for the first time use the $download
-Functions:
-    $analysis m - analysis one file
-    $analysis p - analysis many parts from one file
-    $analysis f - analysis files in folder
-    $analysis pf - analysis many parts from files in folder
-Propertys:
-    '-f' - save in file (analysis m or analysis f)
-    '-s - chainge sentences in part (analysis p or analysis pf)
-Analyzed propertys(analysis pf):
-    '-ld' - lexical divercity
-    '-mw' - mean word len
-    '-ms' - mean sentence len
-    '-cs' - commas per symbols
+    help_text = """Если вы используете это впервые, введите $download
+Функции:
+    $help - помощь
+    $download - установить компоненты nltk
+    $analysis m - проанализировать 1 файл
+    $analysis p - проанализировать 1 файл по частям
+    $analysis f - проанализировать все файлы в папке
+    $analysis pf - проанализировать все файлы в папке по частям
+Вас могут попросить ввести дополнительную информацию, например путь к файлу, или выбрать модификаторы.
+Свойства:
+    '-f' - сохранить в файл (analysis m или analysis f)
+    '-s - изменить коичество предожений в блоке (analysis p или analysis pf)
+Анализируемые свойства (analysis p или analysis pf):
+    '-ld' - lexical divercity (лексическое разнообразие)
+    '-mw' - mean word len (средня длинна слова)
+    '-ms' - mean sentence len (средняя длинна предложения)
+    '-cs' - commas per symbols (количество запятых на 1000 символов)
 """
     print(help_text)
     pass
@@ -62,24 +66,24 @@ def return_analysis_parts_view():
     way_to_file, propertys = inputs()
     kwargs = {'sentences_in_block': 150}
     analysis_propertys(propertys, kwargs)
-    print('Please wait...')
+    print('Наберитесь терпения...')
     functions.return_analysis_parts(way_to_file, **kwargs)
 
 
 def return_analysis_folder_view():
-    way_to_file, propertys = inputs(way_to='folder')
+    way_to_file, propertys = inputs(path_to='folder')
     kwargs = {'check_author': False,
               'author': ['name', 'surname'],
               'in_file': False,
               'file_name': 'default.csv',
               'new': True}
     analysis_propertys(propertys, kwargs)
-    print('Please wait...')
+    print('Подождите...')
     functions.return_analysis_folder(way_to_file, **kwargs)
 
 
 def return_analysis_parts_folder_view():
-    way_to_file, propertys = inputs(way_to='folder')
+    way_to_file, propertys = inputs(path_to='folder')
     kwargs = {
         'sentences_in_block': 150,
         'check_author': False,
@@ -94,7 +98,7 @@ def return_analysis_parts_folder_view():
     p = input('Please analyzed property: ')
     if p in props.keys():
         kwargs['prop'] = props[p]
-    print('Please wait...')
+    print('Ceep calm...')
     functions.return_analysis_parts_folder(way_to_file, **kwargs)
 
 
@@ -108,7 +112,7 @@ COMMANDS = {
 }
 
 if __name__ == '__main__':
-    print("You can use $help")
+    help_me()
     while True:
         command = input()
         if command in COMMANDS.keys():
@@ -119,4 +123,4 @@ if __name__ == '__main__':
         elif command.lower() == 'exit':
             break
         else:
-            print('No such command')
+            print('Такой команды пока что не существует')

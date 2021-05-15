@@ -6,8 +6,8 @@ import csv
 import fictionbooklib
 import textanalyzerlib
 
-COLUMNS = ['Book', 'Lexical diversity', 'Mean word len',
-           'Mean sentence len', 'Commas per 1000 symbols']
+COLUMNS = ['Книга', 'Лексическое разнообразие', 'Средняя длинна слова',
+           'Средняя длинна предложения', 'Количество запятых на 1000 символов']
 # supporting functions
 
 

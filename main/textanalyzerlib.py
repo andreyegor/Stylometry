@@ -10,12 +10,12 @@ class analys:
     properties = {}
 
     def __init__(self, text, quantity_symbols=1000, full_analyze=True):
-        """Class for stylometric text analysis. "Parse" functions are needed to parse some text properties. "Get" functions are needed to get this propertiers.
+        """Класс для стилометрического анализа текста. "Parse" функции нужны чтобы узнавать конкретные параметры текста. "Get" функции нужны для того, чтобы получать эти параметры.
 
         Args:
-            text (string): Your text
-            quantity_symbols (int, optional): Length of the text fragment to be analyzed. Defaults to 1000.
-            full_analyze (bool, optional): True for full text analysis, False for manual analysis. Defaults to True.
+            text (string): Ваш текст
+            quantity_symbols (int, optional): Длинна фрагментов текста, которые будут анализироваться некоторыми методами. По умолчанию 1000.
+            full_analyze (bool, optional): True для полного анализа, False дла самостоятельного анализа. По умолчанию True.
         """
         self.text = text
         self.tokens = nltk.word_tokenize(text)
@@ -26,14 +26,14 @@ class analys:
             self.full_parse()
 
     def full_parse(self):
-        """This is a function to full text analysis"""
+        """Это функция для полного анализа текста"""
         self.parse_lexical_divercity()
         self.parse_mean_word_len()
         self.parse_mean_sentence_len()
         self.parse_commas_per_characters()
 
     def remove_punctuation(self):
-        """This is a function to remove punctuation from tokens"""
+        """Это функция для удаления пунктуации из токенов"""
         remove_punctuation = str.maketrans('', '', string.punctuation)
         out = []
         for token in self.tokens:
@@ -66,19 +66,19 @@ class analys:
         self.properties['mean_sentence_len'] = out
         return out
 
-    def elements_per_characters(self, element, qwantity):
-        """This function finds the number of elements per characters in the text
+    def elements_per_characters(self, element):
+        """Это функция для поиска количества елементов на символы
 
         Args:
-            element ([type]): You element
-            qwantity ([type]): number of symbols
+            element ([type]): Ваш элемент
+            qwantity ([type]): Количество символов
         """
         fdist = nltk.probability.FreqDist(nltk.Text(self.tokens))
-        elements = (fdist[element] * qwantity) / fdist.N()
+        elements = (fdist[element] * self.quantity_symbols) / fdist.N()
         return elements
 
     def parse_commas_per_characters(self):
-        out = self.elements_per_characters(',', self.quantity_symbols)
+        out = self.elements_per_characters(',')
         self.properties['commas_per_symbols'] = out
         return out
 

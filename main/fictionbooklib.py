@@ -8,11 +8,11 @@ class FB2:
 
     def __init__(self, way_to_document, full_parse=True):
         """
-        Сlass for get main information for a document. "Parse" functions are needed to parse some document properties. "Get" functions are needed to get this propertiers. 
+        Класс для получения основной информации о документе "Parse" функции нужны чтобы узнавать конкретные параметры документа "Get" функции нужны для получения этих параметров. 
 
         Args:
-            way_to_document (string): Way to you fb2 document
-            full_parse (bool, optional): True for full document parsing, False for manual parsing. Defaults to True.
+            way_to_document (string): Путь к вашему fb2
+            full_parse (bool, optional): True для полного анализа, False для самостоятельного анализа. По умолчанию True.
         """
 
         self.way_to_document = way_to_document
@@ -22,7 +22,7 @@ class FB2:
             self.parse_document()
 
     def parse_document(self):
-        """This is a function to full document parse"""
+        """Это функция для полного анализа документа"""
         self.parse_author()
         self.parse_book_title()
         self.parse_main_text()
