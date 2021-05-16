@@ -12,7 +12,7 @@ class FB2:
 
         Args:
             way_to_document (string): Путь к вашему fb2
-            full_parse (bool, optional): True для полного анализа, False для самостоятельного анализа. По умолчанию True.
+            full_parse (bool, optional): True для полного поиска, False для самостоятельного поиска. По умолчанию True.
         """
 
         self.way_to_document = way_to_document
@@ -53,13 +53,13 @@ class FB2:
         return out
 
     def get_main_text(self):
-        """ None, if you don't parse main text"""
+        """ None, если вы не искали основной текст"""
         return self.main_text
 
     def get_author(self):
-        """ [None, None], if you don't parse author"""
+        """ [None, None], если вы не искали автора (в работе)"""
         return self.author
 
     def get_book_title(self):
-        """ None, if you don't parse book title"""
+        """ None, если вы не искали название книги"""
         return self.book_title
