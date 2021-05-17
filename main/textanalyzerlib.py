@@ -70,8 +70,7 @@ class analys:
         """Это функция для поиска количества елементов на символы
 
         Args:
-            element ([type]): Ваш элемент
-            qwantity ([type]): Количество символов
+            element (string): Ваш элемент
         """
         fdist = nltk.probability.FreqDist(nltk.Text(self.tokens))
         elements = (fdist[element] * self.quantity_symbols) / fdist.N()
